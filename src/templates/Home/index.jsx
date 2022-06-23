@@ -1,7 +1,7 @@
 import './styles.css';
 
 import { Posts } from '../../components/Posts';
-import { loadPosts } from '../../utils/load-posts'
+import { loadPosts } from '../../utils/load-posts';
 import { Button } from '../../components/Button';
 import { TextInput } from '../../components/TextInput';
 import { useState, useEffect, useCallback } from 'react';
@@ -15,8 +15,8 @@ export const Home = () => {
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
 
-  const filteredPosts = !!searchValue ?
-    allPosts.filter(post => {
+  const filteredPosts = searchValue
+    ? allPosts.filter((post) => {
       return post.title.toLowerCase().includes(searchValue.toLowerCase());
     })
     : posts;
@@ -26,7 +26,7 @@ export const Home = () => {
 
     setPosts(postsAndPhotos.slice(page, postsPerPage));
     setAllPosts(postsAndPhotos);
-  }, [])
+  }, []);
 
   useEffect(() => {
     handleLoadPosts(0, postsPerPage);
@@ -39,27 +39,21 @@ export const Home = () => {
 
     setPosts(posts);
     setPage(nextPage);
-  }
+  };
 
   const handleChange = (e) => {
     const { value } = e.target;
     setSearchValue(value);
-  }
+  };
 
   return (
-    <section className='container'>
+    <section className="container">
       <div className="search-container">
-        {!!searchValue && (
-          <h1>Search value: {searchValue}</h1>
-        )}
-        <TextInput
-          handleChange={handleChange}
-          searchValue={searchValue} />
+        {!!searchValue && <h1>Search value: {searchValue}</h1>}
+        <TextInput handleChange={handleChange} searchValue={searchValue} />
       </div>
 
-      {filteredPosts.length > 0 && (
-        <Posts posts={filteredPosts} />
-      )}
+      {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
 
       {filteredPosts.length === 0 && (
         <p>Não existem posts com o termo procurado.</p>
@@ -70,12 +64,13 @@ export const Home = () => {
           <Button
             text="Load More Posts"
             onClick={loadMorePosts}
-            disabled={noMorePosts} />
+            disabled={noMorePosts}
+          />
         )}
       </div>
     </section>
-  )
-}
+  );
+};
 
 // export class Home extends Component {
 //   state = {

@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
-import { PostCard } from ".";
-import { postCardPropsMock } from "./mock";
+import { render, screen } from '@testing-library/react';
+import { PostCard } from '.';
+import { postCardPropsMock } from './mock';
 
 const props = postCardPropsMock;
 
@@ -12,10 +12,13 @@ describe('<PostCard />', () => {
 
     // expect(screen.getByRole('img', { name: /title 1/i }))
     //   .toHaveAttribute('src', 'img/img.png');
-    expect(screen.getByAltText(/title 1/i))
-      .toHaveAttribute('src', 'img/img.png');
-    expect(screen.getByRole('heading', { name: 'title 1 1' }))
-      .toBeInTheDocument();
+    expect(screen.getByAltText(/title 1/i)).toHaveAttribute(
+      'src',
+      'img/img.png',
+    );
+    expect(
+      screen.getByRole('heading', { name: 'title 1 1' }),
+    ).toBeInTheDocument();
     expect(screen.getByText('body 1')).toBeInTheDocument();
   });
 
@@ -24,7 +27,5 @@ describe('<PostCard />', () => {
 
     // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toMatchSnapshot();
-
-
-  })
+  });
 });
