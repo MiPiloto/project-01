@@ -15,22 +15,23 @@ describe('<TextInput />', () => {
 
   it('should call handleChange function on each key pressed', () => {
     const fn = jest.fn();
-    render(<TextInput handleChange={fn} />);
+    render(<TextInput handleChange={fn} searchValue={'test'} />);
 
     const input = screen.getByPlaceholderText(/type your search/i);
     const value = 'test value';
 
     userEvent.type(input, value);
 
-    expect(input.value).toBe(value);
+    expect(input.value).toBe('test');
     expect(fn).toHaveBeenCalledTimes(value.length);
   });
 
   it('should match the snapshot', () => {
     const fn = jest.fn();
-    const { container } = render(<TextInput handleChange={fn} />);
+    const { container } = render(
+      <TextInput handleChange={fn} searchValue={'test'} />,
+    );
 
-    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toMatchSnapshot();
   });
 });
